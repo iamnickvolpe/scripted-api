@@ -36,9 +36,9 @@ function getWeather(callback) {
   });
 }
 
-getWeather(function(data) {
+/*getWeather(function(data) {
   weather = data;
-});
+});*/
 
 setInterval(function() {
   getWeather(function(data) {
@@ -52,7 +52,7 @@ app.get('/weather', function(req, res) {
   res.json(weather.current_observation.temp_f);
 });
 app.post('/list', function(req, res) {
-  list.push(req.body);
+  list.push(req.body.message);
 });
 app.get('/list', function(req, res) {
   res.json(list);
