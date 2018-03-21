@@ -54,52 +54,97 @@ var songs = [
     number: 1,
     name: "God's Plan",
     artist: "Drake",
+    artwork: appURL+"/images/albums/1.png",
     audio: appURL+"/audio/drake_gods-plan.mp3"
   },
   {
     number: 2,
     name: "Perfect",
-    artist: "Ed Sheeran"
+    artist: "Ed Sheeran",
+    artwork: appURL+"/images/albums/2.png",
+    audio: appURL+"ed-sheeran_perfect.mp3"
   },
   {
     number: 3,
     name: "Finesse",
-    artist: "Bruno Mars & Cardi B"
+    artist: "Bruno Mars & Cardi B",
+    artwork: appURL+"/images/albums/3.png"
   },
   {
     number: 4,
     name: "Meant To Be",
-    artist: "Bebe Rexha & Florida Georgia Line"
+    artist: "Bebe Rexha & Florida Georgia Line",
+    artwork: appURL+"/images/albums/4.png"
   },
   {
     number: 5,
     name: "Psycho",
-    artist: "Post Malone Featuring Ty Dolla $ign"
+    artist: "Post Malone Featuring Ty Dolla $ign",
+    artwork: appURL+"/images/albums/5.png"
   },
   {
     number: 6,
     name: "The Middle",
-    artist: "Zedd, Maren Morris & Grey"
+    artist: "Zedd, Maren Morris & Grey",
+    artwork: appURL+"/images/albums/6.png"
   },
   {
     number: 7,
     name: "Havana",
-    artist: "Camila Cabello Featuring Young Thug"
+    artist: "Camila Cabello Featuring Young Thug",
+    artwork: appURL+"/images/albums/7.png"
   },
   {
     number: 8,
     name: "Pray For Me",
-    artist: "The Weeknd & Kendrick Lamar"
+    artist: "The Weeknd & Kendrick Lamar",
+    artwork: appURL+"/images/albums/8.png"
   },
   {
     number: 9,
     name: "Look Alive",
-    artist: "BlocBoy JB Featuring Drake"
+    artist: "BlocBoy JB Featuring Drake",
+    artwork: appURL+"/images/albums/9.png"
   },
   {
     number: 10,
     name: "All The Stars",
-    artist: "Kendrick Lamar & SZA"
+    artist: "Kendrick Lamar & SZA",
+    artwork: appURL+"/images/albums/10.png"
+  }
+];
+
+// TOP SHOWS
+var shows = [
+  {
+    name: "Money Heist"
+  },
+  {
+    name: "Money Heist"
+  },
+  {
+    name: "Money Heist"
+  },
+  {
+    name: "Money Heist"
+  },
+  {
+    name: "Money Heist"
+  },
+  {
+    name: "Money Heist"
+  },
+  {
+    name: "Money Heist"
+  },
+  {
+    name: "Money Heist"
+  },
+  {
+    name: "Money Heist"
+  },
+  {
+    name: "Money Heist"
   }
 ];
 
@@ -115,6 +160,16 @@ app.use('/currenttemperature', function(req, res) {
 // - GET RANDOM GIF
 app.use('/randomgif', function(req, res) {
   res.json(appURL+'/images/gifs/'+(Math.floor(Math.random() * 10) + 1)+'.gif');
+});
+
+// - GET RANDOM SONG
+app.use('/randomsong', function(req, res) {
+  res.json(songs[Math.floor(Math.random() * 10)]);
+});
+
+// - GET RANDOM SONG NAME
+app.use('/randomsongname', function(req, res) {
+  res.json(songs[Math.floor(Math.random() * 10)].name);
 });
 
 // - GET RANDOM ANIMAL
@@ -149,6 +204,15 @@ app.use('/cats', function(req, res) {
   var data = [];
   for(var i = 1; i <= 10; i++ ) {
     data.push(appURL+'/images/cats/'+i+'.jpg');
+  }
+  res.json(data);
+});
+
+// - GET SONG TITLES
+app.use('/songtitles', function(req, res) {
+  var data = [];
+  for(var i = 0; i < songs.length; i++ ) {
+    data.push(songs[i].name);
   }
   res.json(data);
 });
