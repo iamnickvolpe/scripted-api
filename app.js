@@ -5,10 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var request = require('request');
-
 var index = require('./routes/index');
-var users = require('./routes/users');
+
 var app = express();
+
+var appURL = "https://morning-headland-43310.herokuapp.com";
 
 // VIEW ENGINE SETUP
 app.set('views', path.join(__dirname, 'views'));
@@ -47,50 +48,114 @@ setInterval(function() {
   });
 }, 1800000);
 
+// TOP SONGS
+var songs = [
+  {
+    number: 1,
+    name: "God's Plan",
+    artist: "Drake",
+    audio: appURL+"/audio/drake_gods-plan.mp3"
+  },
+  {
+    number: 2,
+    name: "Perfect",
+    artist: "Ed Sheeran"
+  },
+  {
+    number: 3,
+    name: "Finesse",
+    artist: "Bruno Mars & Cardi B"
+  },
+  {
+    number: 4,
+    name: "Meant To Be",
+    artist: "Bebe Rexha & Florida Georgia Line"
+  },
+  {
+    number: 5,
+    name: "Psycho",
+    artist: "Post Malone Featuring Ty Dolla $ign"
+  },
+  {
+    number: 6,
+    name: "The Middle",
+    artist: "Zedd, Maren Morris & Grey"
+  },
+  {
+    number: 7,
+    name: "Havana",
+    artist: "Camila Cabello Featuring Young Thug"
+  },
+  {
+    number: 8,
+    name: "Pray For Me",
+    artist: "The Weeknd & Kendrick Lamar"
+  },
+  {
+    number: 9,
+    name: "Look Alive",
+    artist: "BlocBoy JB Featuring Drake"
+  },
+  {
+    number: 10,
+    name: "All The Stars",
+    artist: "Kendrick Lamar & SZA"
+  }
+];
+
 // SERVE WEBSITE
 app.use('/', index);
 
 // ENDPOINTS
+// - GET CURRENT TEMPERATURE
 app.use('/currenttemperature', function(req, res) {
   res.json(weather.current_observation.temp_f);
 });
 
+// - GET RANDOM GIF
 app.use('/randomgif', function(req, res) {
-  res.json('https://morning-headland-43310.herokuapp.com/images/gifs/'+(Math.floor(Math.random() * 10) + 1)+'.gif');
+  res.json(appURL+'/images/gifs/'+(Math.floor(Math.random() * 10) + 1)+'.gif');
 });
 
+// - GET RANDOM ANIMAL
 app.use('/randomanimal', function(req, res) {
   if(req.query.type === "dog") {
-    res.json('https://morning-headland-43310.herokuapp.com/images/dogs/'+(Math.floor(Math.random() * 10) + 1)+'.jpg');
+    res.json(appURL+'/images/dogs/'+(Math.floor(Math.random() * 10) + 1)+'.jpg');
   } else if(req.query.type === "cat") {
-    res.json('https://morning-headland-43310.herokuapp.com/images/cats/'+(Math.floor(Math.random() * 10) + 1)+'.jpg');
-  } else {
-    res.json("You must specify an animal type.");
+    res.json(appURL+'/images/cats/'+(Math.floor(Math.random() * 10) + 1)+'.jpg');
   }
 });
 
+// - GET GIFS
 app.use('/gifs', function(req, res) {
   var data = [];
   for(var i = 1; i <= 10; i++ ) {
-    data.push('https://morning-headland-43310.herokuapp.com/images/gifs/'+i+'.gif');
+    data.push(appURL+'/images/gifs/'+i+'.gif');
   }
   res.json(data);
 });
 
+// - GET DOGS
 app.use('/dogs', function(req, res) {
   var data = [];
   for(var i = 1; i <= 10; i++ ) {
-    data.push('https://morning-headland-43310.herokuapp.com/images/dogs/'+i+'.jpg');
+    data.push(appURL+'/images/dogs/'+i+'.jpg');
   }
   res.json(data);
 });
 
+// - GET CATS
 app.use('/cats', function(req, res) {
   var data = [];
   for(var i = 1; i <= 10; i++ ) {
-    data.push('https://morning-headland-43310.herokuapp.com/images/cats/'+i+'.jpg');
+    data.push(appURL+'/images/cats/'+i+'.jpg');
   }
   res.json(data);
+});
+
+// - GET SONGS
+app.use('/songs', function(req, res) {
+  res.json(songs);
 });
 
 // CATCH 404 AND FORWARD TO ERROR HANDLER
@@ -100,13 +165,10 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// error handler
+// HANDLE ERRORS
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
   res.status(err.status || 500);
   res.render('error');
 });
