@@ -284,7 +284,7 @@ app.get('/songs/random', function(req, res) {
 });
 
 // - GET SONG BY ID
-app.get('/songs/:id', function(req, res) {
+app.get('/songs/:id', function(req, res, next) {
   if(req.params.id > -1 && req.params.id < 10) {
     res.json(songs[req.params.id]);
   } else {
@@ -315,7 +315,7 @@ app.get('/song-titles/random', function(req, res) {
 });
 
 // - GET SONG TITLE BY ID
-app.get('/song-titles/:id', function(req, res) {
+app.get('/song-titles/:id', function(req, res, next) {
   if(req.params.id > -1 && req.params.id < 10) {
     res.json(songs[req.params.id].title);
   } else {
@@ -350,7 +350,7 @@ app.get('/shows/random', function(req, res) {
 });
 
 // - GET SHOW BY ID
-app.get('/shows/:id', function(req, res) {
+app.get('/shows/:id', function(req, res, next) {
   if(req.params.id > -1 && req.params.id < 10) {
     res.json(shows[req.params.id]);
   } else {
@@ -371,7 +371,7 @@ app.get('/show-titles/random', function(req, res) {
 });
 
 // - GET SHOW TITLE BY ID
-app.get('/show-titles/:id', function(req, res) {
+app.get('/show-titles/:id', function(req, res, next) {
   if(req.params.id > -1 && req.params.id < 10) {
     res.json(shows[req.params.id].title);
   } else {
@@ -422,7 +422,7 @@ app.get('/tweets', function(req, res) {
 
     newTweets.push({
       text: tweet.text,
-      date: moment(tweet.created_at, "UTC").format("dddd, MMMM Do YYYY, h:mm:ssa"),
+      date: tweet.created_at,
       author_name: tweet.user.name,
       author_handle: tweet.user.screen_name,
       author_avatar: tweet.user.profile_image_url_https,
@@ -438,7 +438,7 @@ app.get('/quotes/random', function(req, res) {
 });
 
 // - GET QUOTE BY ID
-app.use('/quotes/:id', function(req, res) {
+app.use('/quotes/:id', function(req, res, next) {
   if(req.params.id > -1 && req.params.id < 10) {
     res.json(quotes[req.params.id]);
   } else {
@@ -469,7 +469,7 @@ app.get('/quote-texts/random', function(req, res) {
 });
 
 // - GET QUOTE TEXTS BY ID
-app.get('/quote-texts/:id', function(req, res) {
+app.get('/quote-texts/:id', function(req, res, next) {
   if(req.params.id > -1 && req.params.id < 10) {
     res.json(quotes[req.params.id].text);
   } else {
@@ -510,8 +510,14 @@ app.get('/message-texts', function(req, res) {
   res.json(data);
 });
 
+// - CLEAR MESSAGES
+app.get('/clear-messages', function(req, res) {
+  messages = [];
+  res.send("Messages cleared successfully.");
+});
+
 // - POST A NEW MESSAGE
-app.post('/messages', function(req,res) {
+app.post('/messages', function(req,res, next) {
   var author = "Unknown";
   if(req.body.author) {
     author = req.body.author;
