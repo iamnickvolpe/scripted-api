@@ -4,22 +4,23 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var request = require('request');
 
 var users = require('./routes/users');
-
 var app = express();
 
-// view engine setup
+// VIEW ENGINE SETUP
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-
+// SET UP EXPRESS
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// ALLOW CROSS-ORIGIN REQUESTS
 app.all('*', function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
@@ -27,9 +28,30 @@ app.all('*', function(req, res, next) {
   next();
 });
 
-app.use('/users', users);
+var weather;
+function getWeather(callback) {
+  request('http://api.wunderground.com/api/f94efdf771bdd8f5/conditions/forecast/q/10011.json', function(error, response, body) {
+    callback(JSON.parse(body));
+  });
+}
 
-// catch 404 and forward to error handler
+getWeather(function(data) {
+  weather = data;
+});
+
+setInterval(function() {
+  getWeather(function(data) {
+    weather = data;
+  });
+}, 1800000);
+
+// ENDPOINTS
+app.use('/users', users);
+app.get('/weather', function(req, res) {
+  res.json(weather.current_observation.temp_f);
+});
+
+// CATCH 404 AND FORWARD TO ERROR HANDLER
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
