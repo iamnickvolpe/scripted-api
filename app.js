@@ -59,6 +59,16 @@ app.use('/randomgif', function(req, res) {
   res.json('https://morning-headland-43310.herokuapp.com/images/gifs/'+(Math.floor(Math.random() * 10) + 1)+'.gif');
 });
 
+app.use('/randomanimal', function(req, res) {
+  if(req.query.type === "dog") {
+    res.json('https://morning-headland-43310.herokuapp.com/images/dogs/'+(Math.floor(Math.random() * 10) + 1)+'.jpg');
+  } else if(req.query.type === "cat") {
+    res.json('https://morning-headland-43310.herokuapp.com/images/cats/'+(Math.floor(Math.random() * 10) + 1)+'.jpg');
+  } else {
+    res.json("You must specify an animal type.");
+  }
+});
+
 // CATCH 404 AND FORWARD TO ERROR HANDLER
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
