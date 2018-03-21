@@ -69,6 +69,30 @@ app.use('/randomanimal', function(req, res) {
   }
 });
 
+app.use('/gifs', function(req, res) {
+  var data = [];
+  for(var i = 1; i <= 10; i++ ) {
+    data.push('https://morning-headland-43310.herokuapp.com/images/gifs/'+i+'.gif');
+  }
+  res.json(data);
+});
+
+app.use('/dogs', function(req, res) {
+  var data = [];
+  for(var i = 1; i <= 10; i++ ) {
+    data.push('https://morning-headland-43310.herokuapp.com/images/dogs/'+i+'.jpg');
+  }
+  res.json(data);
+});
+
+app.use('/cats', function(req, res) {
+  var data = [];
+  for(var i = 1; i <= 10; i++ ) {
+    data.push('https://morning-headland-43310.herokuapp.com/images/cats/'+i+'.jpg');
+  }
+  res.json(data);
+});
+
 // CATCH 404 AND FORWARD TO ERROR HANDLER
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
