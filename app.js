@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var request = require('request');
 
+var index = require('./routes/index');
 var users = require('./routes/users');
 var app = express();
 
@@ -28,17 +29,17 @@ app.all('*', function(req, res, next) {
   next();
 });
 
+// WEATHER
 var weather;
-var list = [];
 function getWeather(callback) {
   request('http://api.wunderground.com/api/f94efdf771bdd8f5/conditions/forecast/q/10011.json', function(error, response, body) {
     callback(JSON.parse(body));
   });
 }
 
-/*getWeather(function(data) {
+getWeather(function(data) {
   weather = data;
-});*/
+});
 
 setInterval(function() {
   getWeather(function(data) {
@@ -46,16 +47,16 @@ setInterval(function() {
   });
 }, 1800000);
 
+// SERVE WEBSITE
+app.use('/', index);
+
 // ENDPOINTS
-app.use('/users', users);
-app.get('/weather', function(req, res) {
+app.use('/currenttemperature', function(req, res) {
   res.json(weather.current_observation.temp_f);
 });
-app.post('/list', function(req, res) {
-  list.push(req.body.message);
-});
-app.get('/list', function(req, res) {
-  res.json(list);
+
+app.use('/randomgif', function(req, res) {
+  res.json('https://morning-headland-43310.herokuapp.com/images/gifs/'+(Math.floor(Math.random() * 10) + 1)+'.gif');
 });
 
 // CATCH 404 AND FORWARD TO ERROR HANDLER
