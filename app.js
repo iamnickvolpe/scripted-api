@@ -29,6 +29,7 @@ app.all('*', function(req, res, next) {
 });
 
 var weather;
+var list = [];
 function getWeather(callback) {
   request('http://api.wunderground.com/api/f94efdf771bdd8f5/conditions/forecast/q/10011.json', function(error, response, body) {
     callback(JSON.parse(body));
@@ -49,6 +50,12 @@ setInterval(function() {
 app.use('/users', users);
 app.get('/weather', function(req, res) {
   res.json(weather.current_observation.temp_f);
+});
+app.post('/list', function(req, res) {
+  list.push(req.body);
+});
+app.get('/list', function(req, res) {
+  res.json(list);
 });
 
 // CATCH 404 AND FORWARD TO ERROR HANDLER
