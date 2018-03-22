@@ -7,18 +7,18 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var index = require('./routes/index');
 var Twitter = require('twitter');
-var moment = require('moment');
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 
 var client = new Twitter({
-  consumer_key: 'thOZBUn5aBGEu8cPk76cfkNHM',
-  consumer_secret: '2ZYgd2o376l4tkYOtmdydRBc65kPKWFK7cuZqLh3v5LOCXf0oK',
-  access_token_key: '211250937-XyVCatXtxetCarOfUd1q83mu8nGdsBJvwNTt08gk',
-  access_token_secret: 'ClqfFw0t6N3yO5QBN1Bu4WhZY2jFPNkEJsfQ2IXE0gaWn'
+  consumer_key: process.env.TWITTER_CONSUMER_KEY,
+  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+  access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 });
 
 var app = express();
-
-var appURL = "https://morning-headland-43310.herokuapp.com";
 
 // VIEW ENGINE SETUP
 app.set('views', path.join(__dirname, 'views'));
@@ -42,7 +42,7 @@ app.all('*', function(req, res, next) {
 // WEATHER
 var weather;
 function getWeather(callback) {
-  request('http://api.wunderground.com/api/f94efdf771bdd8f5/conditions/forecast/q/10011.json', function(error, response, body) {
+  request('http://api.wunderground.com/api/'+process.env.WEATHER_UNDERGROUND_KEY+'/conditions/forecast/q/10011.json', function(error, response, body) {
     callback(JSON.parse(body));
   });
 }
@@ -84,63 +84,63 @@ var songs = [
     rank: 1,
     title: "God's Plan",
     artist: "Drake",
-    artwork: appURL+"/images/albums/0.png",
-    audio: appURL+"/audio/drake_gods-plan.mp3"
+    artwork: process.env.ROOT_URL+"/images/albums/0.png",
+    audio: process.env.ROOT_URL+"/audio/drake_gods-plan.mp3"
   },
   {
     rank: 2,
     title: "Perfect",
     artist: "Ed Sheeran",
-    artwork: appURL+"/images/albums/1.png",
-    audio: appURL+"ed-sheeran_perfect.mp3"
+    artwork: process.env.ROOT_URL+"/images/albums/1.png",
+    audio: process.env.ROOT_URL+"ed-sheeran_perfect.mp3"
   },
   {
     rank: 3,
     title: "Finesse",
     artist: "Bruno Mars & Cardi B",
-    artwork: appURL+"/images/albums/2.png"
+    artwork: process.env.ROOT_URL+"/images/albums/2.png"
   },
   {
     rank: 4,
     title: "Meant To Be",
     artist: "Bebe Rexha & Florida Georgia Line",
-    artwork: appURL+"/images/albums/3.png"
+    artwork: process.env.ROOT_URL+"/images/albums/3.png"
   },
   {
     rank: 5,
     title: "Psycho",
     artist: "Post Malone Featuring Ty Dolla $ign",
-    artwork: appURL+"/images/albums/4.png"
+    artwork: process.env.ROOT_URL+"/images/albums/4.png"
   },
   {
     rank: 6,
     title: "The Middle",
     artist: "Zedd, Maren Morris & Grey",
-    artwork: appURL+"/images/albums/5.png"
+    artwork: process.env.ROOT_URL+"/images/albums/5.png"
   },
   {
     rank: 7,
     title: "Havana",
     artist: "Camila Cabello Featuring Young Thug",
-    artwork: appURL+"/images/albums/6.png"
+    artwork: process.env.ROOT_URL+"/images/albums/6.png"
   },
   {
     rank: 8,
     title: "Pray For Me",
     artist: "The Weeknd & Kendrick Lamar",
-    artwork: appURL+"/images/albums/7.png"
+    artwork: process.env.ROOT_URL+"/images/albums/7.png"
   },
   {
     rank: 9,
     title: "Look Alive",
     artist: "BlocBoy JB Featuring Drake",
-    artwork: appURL+"/images/albums/8.png"
+    artwork: process.env.ROOT_URL+"/images/albums/8.png"
   },
   {
     rank: 10,
     title: "All The Stars",
     artist: "Kendrick Lamar & SZA",
-    artwork: appURL+"/images/albums/9.png"
+    artwork: process.env.ROOT_URL+"/images/albums/9.png"
   }
 ];
 
@@ -148,43 +148,43 @@ var songs = [
 var shows = [
   {
     title: "Money Heist",
-    artwork: appURL+"/images/shows/0.png"
+    artwork: process.env.ROOT_URL+"/images/shows/0.png"
   },
   {
     title: "Dark",
-    artwork: appURL+"/images/shows/1.png"
+    artwork: process.env.ROOT_URL+"/images/shows/1.png"
   },
   {
     title: "Stranger Things",
-    artwork: appURL+"/images/shows/2.png"
+    artwork: process.env.ROOT_URL+"/images/shows/2.png"
   },
   {
     title: "13 Reasons Why",
-    artwork: appURL+"/images/shows/3.png"
+    artwork: process.env.ROOT_URL+"/images/shows/3.png"
   },
   {
     title: "Black Mirror",
-    artwork: appURL+"/images/shows/4.png"
+    artwork: process.env.ROOT_URL+"/images/shows/4.png"
   },
   {
     title: "Jessica Jones",
-    artwork: appURL+"/images/shows/5.png"
+    artwork: process.env.ROOT_URL+"/images/shows/5.png"
   },
   {
     title: "The Crown",
-    artwork: appURL+"/images/shows/6.png"
+    artwork: process.env.ROOT_URL+"/images/shows/6.png"
   },
   {
     title: "A Series of Unfortunate Events",
-    artwork: appURL+"/images/shows/7.png"
+    artwork: process.env.ROOT_URL+"/images/shows/7.png"
   },
   {
     title: "Orange is the New Black",
-    artwork: appURL+"/images/shows/8.png"
+    artwork: process.env.ROOT_URL+"/images/shows/8.png"
   },
   {
     title: "Daredevil",
-    artwork: appURL+"/images/shows/9.png"
+    artwork: process.env.ROOT_URL+"/images/shows/9.png"
   }
 ];
 
@@ -255,13 +255,13 @@ app.get('/todays-forecast', function(req, res) {
 
 // - GET RANDOM GIF
 app.get('/gifs/random', function(req, res) {
-  res.json(appURL+'/images/gifs/'+(Math.floor(Math.random() * 10))+'.gif');
+  res.json(process.env.ROOT_URL+'/images/gifs/'+(Math.floor(Math.random() * 10))+'.gif');
 });
 
 // - GET GIF BY ID
 app.get('/gifs/:id', function(req, res, next) {
   if(req.params.id > -1 && req.params.id < 10) {
-    res.json(appURL+'/images/gifs/'+req.params.id+'.gif');
+    res.json(process.env.ROOT_URL+'/images/gifs/'+req.params.id+'.gif');
   } else {
     var err = new Error('You must have a valid GIF ID');
     err.status = 400;
@@ -273,7 +273,7 @@ app.get('/gifs/:id', function(req, res, next) {
 app.get('/gifs', function(req, res) {
   var data = [];
   for(var i = 0; i < 10; i++ ) {
-    data.push(appURL+'/images/gifs/'+i+'.gif');
+    data.push(process.env.ROOT_URL+'/images/gifs/'+i+'.gif');
   }
   res.json(data);
 });
@@ -394,7 +394,7 @@ app.get('/show-titles', function(req, res) {
 app.get('/dogs', function(req, res) {
   var data = [];
   for(var i = 0; i < 10; i++ ) {
-    data.push(appURL+'/images/dogs/'+i+'.jpg');
+    data.push(process.env.ROOT_URL+'/images/dogs/'+i+'.jpg');
   }
   res.json(data);
 });
@@ -403,7 +403,7 @@ app.get('/dogs', function(req, res) {
 app.get('/cats', function(req, res) {
   var data = [];
   for(var i = 0; i < 10; i++ ) {
-    data.push(appURL+'/images/cats/'+i+'.jpg');
+    data.push(process.env.ROOT_URL+'/images/cats/'+i+'.jpg');
   }
   res.json(data);
 });
@@ -426,7 +426,8 @@ app.get('/tweets', function(req, res) {
       author_name: tweet.user.name,
       author_handle: tweet.user.screen_name,
       author_avatar: tweet.user.profile_image_url_https,
-      image: image
+      image: image,
+      url: "https://www.twitter.com/statuses/"+tweet.id_str
     });
   });
   res.json(newTweets);
