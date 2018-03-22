@@ -375,7 +375,7 @@ app.get('/shows', function(req, res) {
 
 // - GET RANDOM SHOW TITLE
 app.get('/show-titles/random', function(req, res) {
-  res.json(shows[Math.floor(Math.random() * 10)].title);
+  res.send(shows[Math.floor(Math.random() * 10)].title);
 });
 
 // - GET SHOW TITLE BY ID
@@ -480,7 +480,7 @@ app.get('/quote-texts/random', function(req, res) {
 // - GET QUOTE TEXTS BY ID
 app.get('/quote-texts/:id', function(req, res, next) {
   if(req.params.id > -1 && req.params.id < 10) {
-    res.json(quotes[req.params.id].text);
+    res.send(quotes[req.params.id].text);
   } else {
     var err = new Error('You must have a valid Quote ID');
     err.status = 400;
