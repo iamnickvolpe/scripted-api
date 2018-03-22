@@ -253,6 +253,11 @@ app.get('/current-temperature', function(req, res) {
   res.json(weather.current_observation.temp_f);
 });
 
+// - GET RANDOM NUMBER
+app.get('/random-number', function(req, res) {
+  res.json(Math.floor(Math.random() * 100) + 1);
+});
+
 // - GET TODAY'S FORECAST
 app.get('/todays-forecast', function(req, res) {
   res.json({
