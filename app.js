@@ -92,63 +92,63 @@ var songs = [
     title: "Perfect",
     artist: "Ed Sheeran",
     artwork: process.env.ROOT_URL+"/images/albums/1.png",
-    audio: process.env.ROOT_URL+"ed-sheeran_perfect.mp3"
+    audio: process.env.ROOT_URL+"/audio/ed-sheeran_perfect.mp3"
   },
   {
     rank: 3,
     title: "Finesse",
     artist: "Bruno Mars & Cardi B",
     artwork: process.env.ROOT_URL+"/images/albums/2.png",
-    audio: process.env.ROOT_URL+"bruno-mars_finesse.mp3"
+    audio: process.env.ROOT_URL+"/audio/bruno-mars_finesse.mp3"
   },
   {
     rank: 4,
     title: "Meant To Be",
     artist: "Bebe Rexha & Florida Georgia Line",
     artwork: process.env.ROOT_URL+"/images/albums/3.png",
-    audio: process.env.ROOT_URL+"bebe-rexha_meant-to-be.mp3"
+    audio: process.env.ROOT_URL+"/audio/bebe-rexha_meant-to-be.mp3"
   },
   {
     rank: 5,
     title: "Psycho",
     artist: "Post Malone Featuring Ty Dolla $ign",
     artwork: process.env.ROOT_URL+"/images/albums/4.png",
-    audio: process.env.ROOT_URL+"post-malone_psycho.mp3"
+    audio: process.env.ROOT_URL+"/audio/post-malone_psycho.mp3"
   },
   {
     rank: 6,
     title: "The Middle",
     artist: "Zedd, Maren Morris & Grey",
     artwork: process.env.ROOT_URL+"/images/albums/5.png",
-    audio: process.env.ROOT_URL+"zedd_the-middle.mp3"
+    audio: process.env.ROOT_URL+"/audio/zedd_the-middle.mp3"
   },
   {
     rank: 7,
     title: "Havana",
     artist: "Camila Cabello Featuring Young Thug",
     artwork: process.env.ROOT_URL+"/images/albums/6.png",
-    audio: process.env.ROOT_URL+"camila-cabello_havana.mp3"
+    audio: process.env.ROOT_URL+"/audio/camila-cabello_havana.mp3"
   },
   {
     rank: 8,
     title: "Pray For Me",
     artist: "The Weeknd & Kendrick Lamar",
     artwork: process.env.ROOT_URL+"/images/albums/7.png",
-    audio: process.env.ROOT_URL+"camila-cabello_havana.mp3"
+    audio: process.env.ROOT_URL+"/audio/camila-cabello_havana.mp3"
   },
   {
     rank: 9,
     title: "Look Alive",
     artist: "BlocBoy JB Featuring Drake",
     artwork: process.env.ROOT_URL+"/images/albums/8.png",
-    audio: process.env.ROOT_URL+"blocboy_look-alive.mp3"
+    audio: process.env.ROOT_URL+"/audio/blocboy_look-alive.mp3"
   },
   {
     rank: 10,
     title: "All The Stars",
     artist: "Kendrick Lamar & SZA",
     artwork: process.env.ROOT_URL+"/images/albums/9.png",
-    audio: process.env.ROOT_URL+"kendrick-lamar_all-the-stars.mp3"
+    audio: process.env.ROOT_URL+"/audio/kendrick-lamar_all-the-stars.mp3"
   }
 ];
 
