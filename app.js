@@ -507,13 +507,15 @@ app.get('/quote-texts', function(req, res) {
 
 // - GET MESSAGES
 app.get('/messages', function(req, res) {
-  res.json(messages);
+  var newMessages = messages.reverse();
+  res.json(newMessages);
 });
 
 // - GET MESSAGE TEXTS
 app.get('/message-texts', function(req, res) {
   var data = [];
-  messages.forEach(function(message) {
+  var newMessages = messages.reverse();
+  newMessages.forEach(function(message) {
     data.push(message.text);
   });
   res.json(data);
