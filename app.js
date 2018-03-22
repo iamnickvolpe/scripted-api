@@ -247,7 +247,7 @@ var randomNumber = Math.floor(Math.random() * 100) + 1;
 
 setInterval(function() {
   randomNumber = Math.floor(Math.random() * 100) + 1;
-}, 120000);
+}, 60000);
 
 // SERVE WEBSITE
 app.get('/', index);
