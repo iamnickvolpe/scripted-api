@@ -243,7 +243,7 @@ var quotes = [
 
 var messages = [];
 var messageId = 0;
-var randomNumber = 1;
+var randomNumber = Math.floor(Math.random() * 100) + 1;
 
 setInterval(function() {
   randomNumber = Math.floor(Math.random() * 100) + 1;
