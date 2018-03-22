@@ -526,6 +526,7 @@ app.get('/message-texts', function(req, res) {
 // - CLEAR MESSAGES
 app.get('/clear-messages', function(req, res) {
   messages = [];
+  messageId = 0;
   res.status(201).send('');
 });
 
