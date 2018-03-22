@@ -248,7 +248,7 @@ app.get('/', index);
 // ENDPOINTS
 // - GET CURRENT TEMPERATURE
 app.get('/current-temperature', function(req, res) {
-  res.send(weather.current_observation.temp_f);
+  res.send(weather.current_observation.temp_f.toString());
 });
 
 // - GET TODAY'S FORECAST
