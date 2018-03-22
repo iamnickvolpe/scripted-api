@@ -243,6 +243,11 @@ var quotes = [
 
 var messages = [];
 var messageId = 0;
+var randomNumber = 1;
+
+setInterval(function() {
+  randomNumber = Math.floor(Math.random() * 100) + 1;
+}, 120000);
 
 // SERVE WEBSITE
 app.get('/', index);
@@ -255,7 +260,7 @@ app.get('/current-temperature', function(req, res) {
 
 // - GET RANDOM NUMBER
 app.get('/random-number', function(req, res) {
-  res.json(Math.floor(Math.random() * 100) + 1);
+  res.json(randomNumber);
 });
 
 // - GET TODAY'S FORECAST
