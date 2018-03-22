@@ -134,7 +134,7 @@ var songs = [
     title: "Pray For Me",
     artist: "The Weeknd & Kendrick Lamar",
     artwork: process.env.ROOT_URL+"/images/albums/7.png",
-    audio: process.env.ROOT_URL+"/audio/camila-cabello_havana.mp3"
+    audio: process.env.ROOT_URL+"/audio/the-weeknd_pray-for-me.mp3"
   },
   {
     rank: 9,
