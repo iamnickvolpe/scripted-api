@@ -248,7 +248,7 @@ app.get('/', index);
 // ENDPOINTS
 // - GET CURRENT TEMPERATURE
 app.get('/current-temperature', function(req, res) {
-  res.json(weather.current_observation.temp_f);
+  res.send(weather.current_observation.temp_f);
 });
 
 // - GET TODAY'S FORECAST
@@ -263,13 +263,13 @@ app.get('/todays-forecast', function(req, res) {
 
 // - GET RANDOM GIF
 app.get('/gifs/random', function(req, res) {
-  res.json(process.env.ROOT_URL+'/images/gifs/'+(Math.floor(Math.random() * 10))+'.gif');
+  res.send(process.env.ROOT_URL+'/images/gifs/'+(Math.floor(Math.random() * 10))+'.gif');
 });
 
 // - GET GIF BY ID
 app.get('/gifs/:id', function(req, res, next) {
   if(req.params.id > -1 && req.params.id < 10) {
-    res.json(process.env.ROOT_URL+'/images/gifs/'+req.params.id+'.gif');
+    res.send(process.env.ROOT_URL+'/images/gifs/'+req.params.id+'.gif');
   } else {
     var err = new Error('You must have a valid GIF ID');
     err.status = 400;
@@ -319,13 +319,13 @@ app.get('/songs', function(req, res) {
 
 // - GET RANDOM SONG TITLE
 app.get('/song-titles/random', function(req, res) {
-  res.json(songs[Math.floor(Math.random() * 10)].title);
+  res.send(songs[Math.floor(Math.random() * 10)].title);
 });
 
 // - GET SONG TITLE BY ID
 app.get('/song-titles/:id', function(req, res, next) {
   if(req.params.id > -1 && req.params.id < 10) {
-    res.json(songs[req.params.id].title);
+    res.send(songs[req.params.id].title);
   } else {
     var err = new Error('You must have a valid Song ID');
     err.status = 400;
@@ -354,7 +354,7 @@ app.get('/song-titles', function(req, res) {
 
 // - GET RANDOM SHOW
 app.get('/shows/random', function(req, res) {
-  res.json(shows[Math.floor(Math.random() * 10)]);
+  res.send(shows[Math.floor(Math.random() * 10)]);
 });
 
 // - GET SHOW BY ID
@@ -381,7 +381,7 @@ app.get('/show-titles/random', function(req, res) {
 // - GET SHOW TITLE BY ID
 app.get('/show-titles/:id', function(req, res, next) {
   if(req.params.id > -1 && req.params.id < 10) {
-    res.json(shows[req.params.id].title);
+    res.send(shows[req.params.id].title);
   } else {
     var err = new Error('You must have a valid Show ID');
     err.status = 400;
@@ -474,7 +474,7 @@ app.get('/quotes', function(req, res) {
 
 // - GET RANDOM QUOTE TEXT
 app.get('/quote-texts/random', function(req, res) {
-  res.json(quotes[Math.floor(Math.random() * 10)].text);
+  res.send(quotes[Math.floor(Math.random() * 10)].text);
 });
 
 // - GET QUOTE TEXTS BY ID
@@ -537,6 +537,7 @@ app.post('/messages', function(req,res, next) {
       date: new Date(),
       author: author
     });
+    res.status(201).send('');
   } else {
     var err = new Error('You must add text to your message.');
     err.status = 400;
