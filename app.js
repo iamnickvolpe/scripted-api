@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var index = require('./routes/index');
 var Twitter = require('twitter');
+var moment = require('moment');
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
@@ -241,6 +242,7 @@ var quotes = [
 ];
 
 var messages = [];
+var messageId = 0;
 
 // SERVE WEBSITE
 app.get('/', index);
@@ -430,7 +432,7 @@ app.get('/tweets', function(req, res) {
 
     newTweets.push({
       text: tweet.text,
-      date: tweet.created_at,
+      date: moment(tweet.created_at).format("LLLL"),
       author_name: tweet.user.name,
       author_handle: tweet.user.screen_name,
       author_avatar: tweet.user.profile_image_url_https,
@@ -529,15 +531,18 @@ app.get('/clear-messages', function(req, res) {
 
 // - POST A NEW MESSAGE
 app.post('/messages', function(req,res, next) {
+  var date = new Date();
   var author = "Unknown";
+  messageId++;
   if(req.body.author) {
     author = req.body.author;
   }
   if(req.body.text) {
     messages.push({
       text: req.body.text,
-      date: new Date(),
-      author: author
+      date: moment(date).format("LLLL"),
+      author: author,
+      id: messageId
     });
     res.status(201).send('');
   } else {
