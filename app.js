@@ -97,28 +97,28 @@ var songs = [
   {
     rank: 3,
     title: "Finesse",
-    artist: "Bruno Mars & Cardi B",
+    artist: "Bruno Mars and Cardi B",
     artwork: process.env.ROOT_URL+"/images/albums/2.png",
     audio: process.env.ROOT_URL+"/audio/bruno-mars_finesse.mp3"
   },
   {
     rank: 4,
     title: "Meant To Be",
-    artist: "Bebe Rexha & Florida Georgia Line",
+    artist: "Bebe Rexha and Florida Georgia Line",
     artwork: process.env.ROOT_URL+"/images/albums/3.png",
     audio: process.env.ROOT_URL+"/audio/bebe-rexha_meant-to-be.mp3"
   },
   {
     rank: 5,
     title: "Psycho",
-    artist: "Post Malone Featuring Ty Dolla $ign",
+    artist: "Post Malone Featuring Ty Dolla Sign",
     artwork: process.env.ROOT_URL+"/images/albums/4.png",
     audio: process.env.ROOT_URL+"/audio/post-malone_psycho.mp3"
   },
   {
     rank: 6,
     title: "The Middle",
-    artist: "Zedd, Maren Morris & Grey",
+    artist: "Zedd, Maren Morris and Grey",
     artwork: process.env.ROOT_URL+"/images/albums/5.png",
     audio: process.env.ROOT_URL+"/audio/zedd_the-middle.mp3"
   },
@@ -132,7 +132,7 @@ var songs = [
   {
     rank: 8,
     title: "Pray For Me",
-    artist: "The Weeknd & Kendrick Lamar",
+    artist: "The Weeknd and Kendrick Lamar",
     artwork: process.env.ROOT_URL+"/images/albums/7.png",
     audio: process.env.ROOT_URL+"/audio/the-weeknd_pray-for-me.mp3"
   },
@@ -146,7 +146,7 @@ var songs = [
   {
     rank: 10,
     title: "All The Stars",
-    artist: "Kendrick Lamar & SZA",
+    artist: "Kendrick Lamar and SZA",
     artwork: process.env.ROOT_URL+"/images/albums/9.png",
     audio: process.env.ROOT_URL+"/audio/kendrick-lamar_all-the-stars.mp3"
   }
