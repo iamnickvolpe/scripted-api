@@ -7,6 +7,7 @@ This is a super simple API that students can use to get back data to use in proj
 3. Obtain a [WeatherUnderground developer account](https://www.wunderground.com/weather/api/) and add credentials to `.env`.
 ## Running the Project
 You'll need the latest version of NodeJS.
+
 `npm install`
 
 `npm start`
