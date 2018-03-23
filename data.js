@@ -48,7 +48,13 @@ var quotes = [
   }
 ];
 
-// TOP SHOWS
+// QUOTE TEXTS
+var quoteTexts = [];
+quotes.forEach(function(quote) {
+  quoteTexts.push(quote.text);
+});
+
+// SHOWS
 var shows = [
   {
     title: "Money Heist",
@@ -92,7 +98,13 @@ var shows = [
   }
 ];
 
-// TOP SONGS
+// SHOW TITLES
+var showTitles = [];
+shows.forEach(function(show) {
+  showTitles.push(show.title);
+});
+
+// SONGS
 var songs = [
   {
     rank: 1,
@@ -166,6 +178,12 @@ var songs = [
   }
 ];
 
+// SONG TITLES
+var songTitles = [];
+songs.forEach(function(song) {
+  songTitles.push(song.title);
+});
+
 // WEATHER
 var weather;
 function getWeather(callback) {
@@ -225,10 +243,31 @@ setInterval(function() {
   });
 }, 60000);
 
+// CATS
+var cats = [];
+for (var i = 0; i < 10; i++) {
+  cats.push(process.env.ROOT_URL + "/images/cats/" + i + ".jpg");
+}
+
+// DOGS
+var dogs = [];
+for (var i = 0; i < 10; i++) {
+  dogs.push(process.env.ROOT_URL + "/images/dogs/" + i + ".jpg");
+}
+
+// GIFS
+var gifs = [];
+for (var i = 0; i < 10; i++) {
+  gifs.push(process.env.ROOT_URL + "/images/gifs/" + i + ".gif");
+}
+
 module.exports = {
   quotes: quotes,
+  quoteTexts: quoteTexts,
   shows: shows,
+  showTitles: showTitles,
   songs: songs,
+  songTitles: songTitles,
   getWeather: function() {
     return weather;
   },
@@ -244,6 +283,15 @@ module.exports = {
     messageId = 0;
   },
   getTweets: function() {
-      return tweets;
+    return tweets;
+  },
+  getCats: function() {
+    return cats;
+  },
+  getDogs: function() {
+    return dogs;
+  },
+  getGifs: function() {
+    return gifs;
   }
 };
